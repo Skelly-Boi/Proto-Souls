@@ -2042,42 +2042,42 @@ skl.abw = new Skill(); skl.abw.id = 135; skl.abw.type=7;
 skl.abw.name = 'Water Absorption'; skl.abw.sp='0.66em';
 skl.abw.desc = 'Ability to absorb Water Ki and assimilate it within your body'+dom.dseparator+'<small style="color:darkorange">Reduces energy loss when wet<br>Provides minor protection from water-based attacks</small>';
 skl.abw.use=function(x,y){return this.lvl}
-skl.abw.onLevel=function(){you.aff[4]+=Math.ceil(this.lvl/3+1)}
+skl.abw.onLevel=function(){you.caff[4]-=Math.ceil(this.lvl/3+1)}
 skl.abw.onGive=function(x){if(!you.ki['w'])you.ki['w']=x; else you.ki['w']+=x}
 
 skl.abf = new Skill(); skl.abf.id = 136; skl.abf.type=7;
 skl.abf.name = 'Fire Absorption';  skl.abf.sp='0.66em';
 skl.abf.desc = 'Ability to absorb Fire Ki and assimilate it within your body'+dom.dseparator+'<small style="color:darkorange">Provides minor protection from fire-based attacks</small>';
 skl.abf.use=function(x,y){return this.lvl}
-skl.abf.onLevel=function(){you.aff[3]+=Math.ceil(this.lvl/3+1)}
+skl.abf.onLevel=function(){you.caff[3]-=Math.ceil(this.lvl/3+1)}
 skl.abf.onGive=function(x){if(!you.ki['f'])you.ki['f']=x; else you.ki['f']+=x}
 
 skl.aba = new Skill(); skl.aba.id = 137; skl.aba.type=7;
 skl.aba.name = 'Air Absorption';  skl.aba.sp='0.66em';
 skl.aba.desc = 'Ability to absorb Air Ki and assimilate it within your body'+dom.dseparator+'<small style="color:darkorange">Provides minor protection from air-based attacks</small>';
 skl.aba.use=function(x,y){return this.lvl}
-skl.aba.onLevel=function(){you.aff[1]+=Math.ceil(this.lvl/3+1)}
+skl.aba.onLevel=function(){you.caff[1]-=Math.ceil(this.lvl/3+1)}
 skl.aba.onGive=function(x){if(!you.ki['a'])you.ki['a']=x; else you.ki['a']+=x}
 
 skl.abe = new Skill(); skl.abe.id = 138; skl.abe.type=7;
 skl.abe.name = 'Earth Absorption';  skl.abe.sp='0.66em';
 skl.abe.desc = 'Ability to absorb Earth Ki and assimilate it within your body'+dom.dseparator+'<small style="color:darkorange">Provides minor protection from earth-based attacks</small>';
 skl.abe.use=function(x,y){return this.lvl}
-skl.abe.onLevel=function(){you.aff[2]+=Math.ceil(this.lvl/3+1)}
+skl.abe.onLevel=function(){you.caff[2]-=Math.ceil(this.lvl/3+1)}
 skl.abe.onGive=function(x){if(!you.ki['e'])you.ki['e']=x; else you.ki['e']+=x}
 
 skl.abl = new Skill(); skl.abl.id = 139; skl.abl.type=7;
 skl.abl.name = 'Light Absorption';  skl.abl.sp='0.66em';
 skl.abl.desc = 'Ability to absorb Holy Ki and assimilate it within your body'+dom.dseparator+'<small style="color:darkorange">Provides minor protection from holy attacks</small>';
 skl.abl.use=function(x,y){return this.lvl}
-skl.abl.onLevel=function(){you.aff[5]+=Math.ceil(this.lvl/3+1)}  
+skl.abl.onLevel=function(){you.caff[5]-=Math.ceil(this.lvl/3+1)}  
 skl.abl.onGive=function(x){if(!you.ki['l'])you.ki['l']=x; else you.ki['l']+=x}
 
 skl.abd = new Skill(); skl.abd.id = 140; skl.abd.type=7;
 skl.abd.name = 'Dark Absorption';  skl.abd.sp='0.66em';
 skl.abd.desc = 'Ability to absorb Dark Ki and assimilate it within your body'+dom.dseparator+'<small style="color:darkorange">Provides minor protection from Dark attacks</small>';
 skl.abd.use=function(x,y){return this.lvl}
-skl.abd.onLevel=function(){you.aff[6]+=Math.ceil(this.lvl/3+1)}
+skl.abd.onLevel=function(){you.caff[6]-=Math.ceil(this.lvl/3+1)}
 skl.abd.onGive=function(x){if(!you.ki['d'])you.ki['d']=x; else you.ki['d']+=x}
 
 skl.hvt = new Skill(); skl.hvt.id = 141; skl.hvt.type=8;
@@ -2136,7 +2136,7 @@ skl.tghs = new Skill(); skl.tghs.id = 151; skl.tghs.type=2;
 skl.tghs.name = 'Toughness';
 skl.tghs.desc = 'Durability of one\'s body'+dom.dseparator+'<small style="color:darkorange">Slightly improves physical defence</small>';
 skl.tghs.use=function(x,y){return this.lvl}
-skl.tghs.onLevel=function(){you.aff[0]+=Math.ceil(this.lvl/3+1)}
+skl.tghs.onLevel=function(){you.caff[0]-=Math.ceil(this.lvl/3+1)}
 
 skl.drka = new Skill(); skl.drka.id = 152; skl.drka.type=4;
 skl.drka.name = 'Drinking';
@@ -6769,8 +6769,8 @@ acc.sdl1.name = 'Straw Effigy';
 acc.sdl1.desc = 'Small handcrafted straw doll. Dolls of this type are used to bind with the souls of the living. Appropriate for Curses and Dark Magic manipulation'+dom.dseparator+'<span style="color:hotpink">Physical DEF +5</span>';
 acc.sdl1.slot = 8;
 acc.sdl1.stype = 3;
-acc.sdl1.oneq=function(){you.caff[0]+=5;}
-acc.sdl1.onuneq=function(){you.caff[0]-=5;}
+acc.sdl1.oneq=function(){you.caff[0]-=5;}
+acc.sdl1.onuneq=function(){you.caff[0]+=5;}
 acc.sdl1.onGet=function(){if(acc.bdl1.have&&acc.wdl1.have) {giveRcp(rcp.gdl1); this.onGet=function(){}}}
 
 acc.lckcn = new Eqp(); acc.lckcn.id = 40033;
@@ -7400,7 +7400,7 @@ you.ai = function(){
 function Creature(){
   this.name='Nothing';
   this.desc='Empty space';
-  this.type = 3; //human,beast,undead,enemy,phantom,dragon
+  this.type = 3; //human,beast,undead,evil,phantom,dragon
   this.id = 0;
   this.lvl=1;
   this.exp=1;
