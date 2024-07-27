@@ -10748,6 +10748,12 @@ function renderSkl(skl){
   this.skwmm3.style.backgroundColor='yellow';
 }
 
+function onGen(){
+
+creature.tdummy.hp_r = you.hpmax;
+
+}
+
 function area_init(area){
   if(area.size!==0){
     if(area.id!==101){
@@ -10764,6 +10770,7 @@ function area_init(area){
       } else(area_init(area));
     }
   } else msg('nobody\'s here');
+  return onGen();
   if(!!dom.d7m)dom.d7m.update(); update_m(); dom.d5_1_1m.update();
 }
 
