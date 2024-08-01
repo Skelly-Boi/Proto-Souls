@@ -207,7 +207,7 @@ function save(lvr){
   let yu = {name:you.name,title:you.title.id,lvl:you.lvl,exp:you.exp,exp_t:you.exp_t,sat:you.sat,satmax:you.satmax,sat_r:you.sat_r,hp:you.hp,
   hpmax:you.hpmax,hp_r:you.hp_r,str:you.str,str_r:you.str_r,agl:you.agl,agl_r:you.agl_r,int:you.int,int_r:you.int_r,spd:you.spd,
   spd_r:you.spd_r,luck:you.luck,stat_p:you.stat_p,wealth:you.wealth,crt:you.crt,res:you.res,mods:you.mods,stra:you.stra,strm:you.strm,inta:you.inta,
-  intm:you.intm,agla:you.agla,aglm:you.agml,spda:you.spda,spdm:you.spdm,hpa:you.hpa,hpm:you.hpm,sata:you.sata,satm:you.satm,cls:you.cls,ccls:you.ccls,
+  intm:you.intm,agla:you.agla,aglm:you.agml,spda:you.spda,spdm:you.spdm,hpa:you.hpa,hpm:you.hpm,sata:you.sata,satm:you.satm,cls:you.cls,ccls:you.ccls,spawn:you.spawn,
   aff:you.aff,maff:you.maff,caff:you.caff,cmaff:you.cmaff,karma:you.karma,ki:you.ki}
   global.flags.m_freeze=true;global.current_a.deactivate();dom.ct_bt3.style.backgroundColor='inherit';
   for(let a in you.eff)if(you.eff[a].type===5)you.eff[a].onGive(); 
@@ -306,6 +306,7 @@ function load(dt){
     you.cls=yu_s.cls||[0,0,0]; you.ccls=yu_s.ccls||[0,0,0]
     you.aff=yu_s.aff||[0,0,0,0,0,0,0];you.maff=yu_s.maff||[0,0,0,0,0,0,0];
     you.caff=yu_s.caff||[0,0,0,0,0,0,0];you.cmaff=yu_s.cmaff||[0,0,0,0,0,0,0];
+    you.spawn=yu_s.spawn;
     you.luck= yu_s.luck; you.stat_p= yu_s.stat_p; you.karma=yu_s.karma||0;
     you.wealth= yu_s.wealth;you.crt= yu_s.crt; global.flags.loadstate=true;
     for(let a in callback) for(let b in callback[a].hooks) if(callback[a].hooks[b].data.q) callback[a].hooks.splice(callback[a].hooks[b],1)
@@ -7370,7 +7371,7 @@ function You(){
       for(let x in global.achchk[0]) global.achchk[0][x](killer);
       clearInterval(timers.rdng);clearInterval(timers.rdngdots); global.flags.rdng=false; clearInterval(timers.job1t); clearInterval(timers.bstmonupdate)
       for(let o in this.eff) removeEff(this.eff[o])
-      global.flags.btl=false;global.flags.civil=true; global.current_z.onDeath();if(sector.home.data.smkp>0){smove(chss.lsmain1,false);msg('You ran out of your smoked up house','grey')}else smove(chss.hbed,false);global.current_z=area.nwh;dom.hit_c();dom.d7m.update()}
+      global.flags.btl=false;global.flags.civil=true; global.current_z.onDeath();if(sector.home.data.smkp>0){smove(chss.lsmain1,false);msg('You ran out of your smoked up house','grey')}else smove(you.spawn,false);global.current_z=area.nwh;dom.hit_c();dom.d7m.update()}
       }
   this.onDeathE = function(){}
   this.ai = function(){}
@@ -11580,7 +11581,7 @@ function Chs(){
 
 chss.t1 = new Chs(); chss.t1.id = 101; 
 chss.t1.sl=()=>{ global.lst_loc = 101; global.flags.inside=true; d_loc('Dojo, training area');
-  chs('???: What do you remember?',true); 
+  chs('???: What do you remember?',true);
   chs('"A blade. A dead friend.(Fighter)"',false).addEventListener('click',()=>
   {global.time+=DAY;appear(dom.ctr_1);you.stat_p[0]+=.1;you.stat_p[1]+=.4;
     smove(chss.intro2,false)
@@ -11602,7 +11603,7 @@ chss.intro2 = new Chs(); chss.intro2.id = 99;
 chss.intro2.sl=()=>{ global.lst_loc = 99; global.flags.inside=true; d_loc('Dojo, training area'); 
     chs('???: Then why not wake up? Carve your way back there...',true);
     chs('"...To never fall again."',false).addEventListener('click',()=>{
-      appear(dom.d0);
+      appear(dom.d0);you.spawn = chss.hbed;
       chs('???: Get up, little whisp. Gather back your soul.',true);
       chs('"My form is weak, a shade of what once was."',false).addEventListener('click',()=>{
         appear(dom.inv_ctx);  appear(dom.d_lct);
