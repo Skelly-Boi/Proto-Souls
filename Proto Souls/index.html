@@ -2180,7 +2180,7 @@ skl.hst.use=function(x,y){return this.lvl}
 skl.coldr = new Skill(); skl.coldr.id = 160; skl.coldr.type=6;
 skl.coldr.name = 'Cold Resistance'; skl.coldr.sp='.66em';
 skl.coldr.desc = 'Ability to tolerate harsh and cold temperatures'+dom.dseparator+'<small style="color:darkorange">Slightly decreases energy loss when cold</small>';
-skl.coldr.use=function(x,y){return this.lvl*.004}
+skl.coldr.use=function(x,y){return this.lvl*.005}
 skl.coldr.mlstn=[{lv:1,f:()=>{you.hpa+=20;you.stat_r()},g:false,p:"HP +20"},
 
               {lv:3,f:()=>{you.hpa+=25;skl.painr.p+=.15;skl.tghs.p+=.1;you.stat_r()},g:false,p:"HP + 25, Pain Resistance EXP Gain +15%, Toughness EXP Gain +10%"},
@@ -2188,6 +2188,13 @@ skl.coldr.mlstn=[{lv:1,f:()=>{you.hpa+=20;you.stat_r()},g:false,p:"HP +20"},
               {lv:5,f:()=>{you.eqp_t+=.05;skl.tghs.p+=.1;you.stat_r()},g:false,p:"EXP Gain +5%, Toughness EXP Gain +10%"}, 
 
               ];
+
+skl.meduse = new Skill(); skl.meduse.id = 161; skl.meduse.type=3;
+skl.meduse.name = 'Medicine use'; skl.meduse.sp='.66em';
+skl.meduse.desc = 'Ability to use medicinal items' +dom.dseparator+ '<small style="color:darkorange">Slightly increase effect of medicinal items</small>'
+skl.meduse.mlstn=[
+  {lv:1, f:()=>{you.hpa+=5;skl.painr.p+=.05;you.stat_r()},g:false,p:"HP + 5, Pain Resistance EXP Gain +5%"}
+]
 
 ///////////////////////////////////////////
 //ITM
@@ -2222,9 +2229,9 @@ item.hrb1 = new Item(); item.hrb1.id = 3001;
 item.hrb1.name='Cure Grass'; item.hrb1.val = 7
 item.hrb1.desc='Herb with minor healing properties. Has to be processed before use. Can somewhat speed up recovery of tiny cuts and bruises if applied directly'+dom.dseparator+'Restores<span style=\'color:lime\'> '+item.hrb1.val+' </span>health';
 item.hrb1.stype=4; 
-item.hrb1.use=function(){ global.stat.medst++
-  you.hp+this.val>you.hpmax?you.hp=you.hpmax:you.hp+=this.val;
-  this.amount--; dom.d5_1_1.update(); msg('Restored '+this.val+' hp','lime');
+item.hrb1.use=function(){ 
+  you.hp+Math.round(this.val*(1+you.int*skl.meduse.lvl*.1))>you.hpmax?you.hp=you.hpmax:you.hp+=Math.round(this.val*(1+you.int*skl.meduse.lvl*.1)); global.stat.medst++; giveSkExp(skl.meduse,1);
+  this.amount--; dom.d5_1_1.update(); msg('Restored '+Math.round(this.val*(1+you.int*skl.meduse.lvl*.1))+' hp','lime');
 }
 item.hrb1.onGet=function(){
   if(this.amount>=50) {giveRcp(rcp.hlstw); this.onGet=function(){}}
@@ -11572,25 +11579,40 @@ function Chs(){
 //area.frstn1a4.drop=[{item:item.cp,c:.006},{item:wpn.stk1,c:.0009},{item:wpn.axer,c:.001},{item:item.sbone,c:.0005}]
 
 chss.t1 = new Chs(); chss.t1.id = 101; 
-chss.t1.sl=function(){ global.lst_loc = 101; global.flags.inside=true; d_loc('Dojo, training area');
-  chs('???: Kid',true); 
-  chs('"..."',false).addEventListener('click',function(){global.time+=DAY; 
-    appear(dom.ctr_1);  
-    chs('???: Quit daydreaming',true);
-    chs('"?"',false).addEventListener('click',function(){
-      appear(dom.d0);
-      chs('???: You have training to complete',true);
-      chs('"!"',false).addEventListener('click',function(){
-        appear(dom.inv_ctx);  appear(dom.d_lct);
-        chs('???: Grab your stuff and get to it',true); 
-        chs('"..."',false).addEventListener('click',function(){appear(dom.ct_ctrl);smove(chss.tdf,false);giveItem(wpn.stk1); giveItem(item.hrb1,15);global.flags.aw_u=true;});
-      });
-    });
+chss.t1.sl=()=>{ global.lst_loc = 101; global.flags.inside=true; d_loc('Dojo, training area');
+  chs('???: What do you remember?',true); 
+  chs('"A blade. A dead friend.(Fighter)"',false).addEventListener('click',()=>
+  {global.time+=DAY;appear(dom.ctr_1);you.stat_p[0]+=.1;you.stat_p[1]+=.4;
+    smove(chss.intro2,false)
   });
-};
-if(global.flags.gameone===false){
+  chs('"A shield, that failed to protect.(Tank)"',false).addEventListener('click',()=>
+  {global.time+=DAY;appear(dom.ctr_1);you.stat_p[0]+=.5;
+    smove(chss.intro2,false)
+  });
+  chs('"A spilled bag, of shurikens that never tasted blood.(Ninja)"',false).addEventListener('click',()=>
+  {global.time+=DAY;appear(dom.ctr_1);you.stat_p[2]+=.2;you.stat_p[3]+=.3;
+    smove(chss.intro2,false)
+  });
+}
+  if(global.flags.gameone===false){
   global.current_l=chss.t1; smove(chss.t1);giveFurniture(furniture.frplc,null,false); let _b=giveFurniture(furniture.bed1,null,false); home.bed=_b;
 }
+
+chss.intro2 = new Chs(); chss.intro2.id = 99;
+chss.intro2.sl=()=>{ global.lst_loc = 99; global.flags.inside=true; d_loc('Dojo, training area'); 
+    chs('???: Then why not wake up? Carve your way back there...',true);
+    chs('"...To never fall again."',false).addEventListener('click',()=>{
+      appear(dom.d0);
+      chs('???: Get up, little whisp. Gather back your soul.',true);
+      chs('"My form is weak, a shade of what once was."',false).addEventListener('click',()=>{
+        appear(dom.inv_ctx);  appear(dom.d_lct);
+        chs('???: But the cinders still burn. Will you let them extinguish?',true); 
+        chs('"No! (Pick up your broken soul)"',false).addEventListener('click',()=>{appear(dom.ct_ctrl);smove(chss.tdf,false);giveItem(wpn.stk1); giveItem(item.hrb1,15);global.flags.aw_u=true;});
+      });
+    });
+  }
+
+
 
 chss.tdf = new Chs(); chss.tdf.id = 102;
 chss.tdf.sl=function(){ global.lst_loc = 102;  global.flags.inside=true;
