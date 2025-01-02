@@ -5,7 +5,8 @@ The main branch for proto souls development
 https://23html.github.io/ for the original proto23 by Corc, upon which this mod was created.
 
 ## To play
-Everything needed to play is available in the Proto Souls folder. All you need is oppening the index.html file to play in the browser.
+1. https://skelly-boi.github.io/Proto-Souls/
+2. Download the code. All you need is to open the index.html file to play in the browser. The rest aren't needed.
 
 ## Description
 
