@@ -1,6 +1,6 @@
 <html>
 <meta charset="UTF-8"/>
-<head><title>Proto23</title>
+<head><title>ProtoSouls</title>
 <style>
 html body{font: 1.1em MS Gothic;}
 input:focus{outline: none;}
@@ -2043,42 +2043,42 @@ skl.abw = new Skill(); skl.abw.id = 135; skl.abw.type=7;
 skl.abw.name = 'Water Absorption'; skl.abw.sp='0.66em';
 skl.abw.desc = 'Ability to absorb Water Ki and assimilate it within your body'+dom.dseparator+'<small style="color:darkorange">Reduces energy loss when wet<br>Provides minor protection from water-based attacks</small>';
 skl.abw.use=function(x,y){return this.lvl}
-skl.abw.onLevel=function(){you.caff[4]-=Math.ceil(this.lvl/3+1)}
+skl.abw.onLevel=function(){you.caff[4]+=Math.ceil(this.lvl/3+1)}
 skl.abw.onGive=function(x){if(!you.ki['w'])you.ki['w']=x; else you.ki['w']+=x}
 
 skl.abf = new Skill(); skl.abf.id = 136; skl.abf.type=7;
 skl.abf.name = 'Fire Absorption';  skl.abf.sp='0.66em';
 skl.abf.desc = 'Ability to absorb Fire Ki and assimilate it within your body'+dom.dseparator+'<small style="color:darkorange">Provides minor protection from fire-based attacks</small>';
 skl.abf.use=function(x,y){return this.lvl}
-skl.abf.onLevel=function(){you.caff[3]-=Math.ceil(this.lvl/3+1)}
+skl.abf.onLevel=function(){you.caff[3]+=Math.ceil(this.lvl/3+1)}
 skl.abf.onGive=function(x){if(!you.ki['f'])you.ki['f']=x; else you.ki['f']+=x}
 
 skl.aba = new Skill(); skl.aba.id = 137; skl.aba.type=7;
 skl.aba.name = 'Air Absorption';  skl.aba.sp='0.66em';
 skl.aba.desc = 'Ability to absorb Air Ki and assimilate it within your body'+dom.dseparator+'<small style="color:darkorange">Provides minor protection from air-based attacks</small>';
 skl.aba.use=function(x,y){return this.lvl}
-skl.aba.onLevel=function(){you.caff[1]-=Math.ceil(this.lvl/3+1)}
+skl.aba.onLevel=function(){you.caff[1]+=Math.ceil(this.lvl/3+1)}
 skl.aba.onGive=function(x){if(!you.ki['a'])you.ki['a']=x; else you.ki['a']+=x}
 
 skl.abe = new Skill(); skl.abe.id = 138; skl.abe.type=7;
 skl.abe.name = 'Earth Absorption';  skl.abe.sp='0.66em';
 skl.abe.desc = 'Ability to absorb Earth Ki and assimilate it within your body'+dom.dseparator+'<small style="color:darkorange">Provides minor protection from earth-based attacks</small>';
 skl.abe.use=function(x,y){return this.lvl}
-skl.abe.onLevel=function(){you.caff[2]-=Math.ceil(this.lvl/3+1)}
+skl.abe.onLevel=function(){you.caff[2]+=Math.ceil(this.lvl/3+1)}
 skl.abe.onGive=function(x){if(!you.ki['e'])you.ki['e']=x; else you.ki['e']+=x}
 
 skl.abl = new Skill(); skl.abl.id = 139; skl.abl.type=7;
 skl.abl.name = 'Light Absorption';  skl.abl.sp='0.66em';
 skl.abl.desc = 'Ability to absorb Holy Ki and assimilate it within your body'+dom.dseparator+'<small style="color:darkorange">Provides minor protection from holy attacks</small>';
 skl.abl.use=function(x,y){return this.lvl}
-skl.abl.onLevel=function(){you.caff[5]-=Math.ceil(this.lvl/3+1)}  
+skl.abl.onLevel=function(){you.caff[5]+=Math.ceil(this.lvl/3+1)}  
 skl.abl.onGive=function(x){if(!you.ki['l'])you.ki['l']=x; else you.ki['l']+=x}
 
 skl.abd = new Skill(); skl.abd.id = 140; skl.abd.type=7;
 skl.abd.name = 'Dark Absorption';  skl.abd.sp='0.66em';
 skl.abd.desc = 'Ability to absorb Dark Ki and assimilate it within your body'+dom.dseparator+'<small style="color:darkorange">Provides minor protection from Dark attacks</small>';
 skl.abd.use=function(x,y){return this.lvl}
-skl.abd.onLevel=function(){you.caff[6]-=Math.ceil(this.lvl/3+1)}
+skl.abd.onLevel=function(){you.caff[6]+=Math.ceil(this.lvl/3+1)}
 skl.abd.onGive=function(x){if(!you.ki['d'])you.ki['d']=x; else you.ki['d']+=x}
 
 skl.hvt = new Skill(); skl.hvt.id = 141; skl.hvt.type=8;
@@ -2137,7 +2137,7 @@ skl.tghs = new Skill(); skl.tghs.id = 151; skl.tghs.type=2;
 skl.tghs.name = 'Toughness';
 skl.tghs.desc = 'Durability of one\'s body'+dom.dseparator+'<small style="color:darkorange">Slightly improves physical defence</small>';
 skl.tghs.use=function(x,y){return this.lvl}
-skl.tghs.onLevel=function(){you.caff[0]-=Math.ceil(this.lvl/3+1)}
+skl.tghs.onLevel=function(){you.caff[0]+=Math.ceil(this.lvl/3+1)}
 
 skl.drka = new Skill(); skl.drka.id = 152; skl.drka.type=4;
 skl.drka.name = 'Drinking';
@@ -6777,8 +6777,8 @@ acc.sdl1.name = 'Straw Effigy';
 acc.sdl1.desc = 'Small handcrafted straw doll. Dolls of this type are used to bind with the souls of the living. Appropriate for Curses and Dark Magic manipulation'+dom.dseparator+'<span style="color:hotpink">Physical DEF +5</span>';
 acc.sdl1.slot = 8;
 acc.sdl1.stype = 3;
-acc.sdl1.oneq=function(){you.caff[0]-=5;}
-acc.sdl1.onuneq=function(){you.caff[0]+=5;}
+acc.sdl1.oneq=function(){you.caff[0]+=5;}
+acc.sdl1.onuneq=function(){you.caff[0]-=5;}
 acc.sdl1.onGet=function(){if(acc.bdl1.have&&acc.wdl1.have) {giveRcp(rcp.gdl1); this.onGet=function(){}}}
 
 acc.lckcn = new Eqp(); acc.lckcn.id = 40033;
@@ -6947,7 +6947,7 @@ acc.gsfk.desc = 'Locked vessel containing a volatile tissue sample from the plag
 acc.gsfk.slot = 8;
 acc.gsfk.stype = 3;
 acc.gsfk.rar = 2;
-acc.gsfk.oneq=function(){you.res.ph-=.04;you.caff[6]+=35;you.caff[0]+=600}
+acc.gsfk.oneq=function(){you.res.ph-=.04;you.caff[6]+=35}
 acc.gsfk.onuneq=function(){you.res.ph+=.04;you.caff[6]-=35}
 
 acc.jln1 = new Eqp(); acc.jln1.id = 40053;
@@ -7549,7 +7549,6 @@ creature.sdummy.desc = 'He\'s made of straw';
 creature.sdummy.drop =[{item:item.sstraw,chance:.085},{item:item.hrb1,chance:.02}];
 creature.sdummy.aff = [0,0,15,-25,-5,-666,666];
 creature.sdummy.stat_p=[.25,.6,.3,.2];
-creature.sdummy.eqp[0].aff = [0,0,0,0,0,0,20];
 creature.sdummy.ctype = 2;
 creature.sdummy.int_r = 0;
 creature.sdummy.rnk=1;
@@ -9817,7 +9816,7 @@ dom.ct_bt4_5a.addEventListener('click',function(){if(!global.flags.expatv){
   dom.ct_bt4_5a_nhz.addEventListener('click',function(){
     let a = new Date(); let temp = document.createElement('a');
     temp.href = 'data:text/plain;charset=utf-8,'+t; let n = you.name; if(/(<.*>)|(\(.*\))/.test(you.name))n='';
-    temp.download = n+' - v'+global.ver+' - '+(a.getFullYear()+'/'+(a.getMonth()+1)+'/'+a.getDate()+' '+a.getHours()+'_'+(a.getMinutes()>=10?a.getMinutes():'0'+a.getMinutes())+'_'+(a.getSeconds()>=10?a.getSeconds():'0'+a.getSeconds()))+' [Proto23]'; temp.click(); 
+    temp.download = n+' - v'+global.ver+' - '+(a.getFullYear()+'/'+(a.getMonth()+1)+'/'+a.getDate()+' '+a.getHours()+'_'+(a.getMinutes()>=10?a.getMinutes():'0'+a.getMinutes())+'_'+(a.getSeconds()>=10?a.getSeconds():'0'+a.getSeconds()))+' [ProtoSouls]'; temp.click(); 
   });
   dom.ct_bt4_5a_nhx = addElement(dom.ct_bt4_5a_nh,'div'); draggable(dom.ct_bt4_5a_nh,dom.ct_bt4_5a_nc);
   dom.ct_bt4_5a_nhx.innerHTML = '✖'; dom.ct_bt4_5a_nhx.style.float='right';
@@ -11609,7 +11608,7 @@ chss.intro2.sl=()=>{ global.lst_loc = 99; global.flags.inside=true; d_loc('Dojo,
       chs('"My form is weak, a shade of what once was."',false).addEventListener('click',()=>{
         appear(dom.inv_ctx);  appear(dom.d_lct);
         chs('???: But the cinders still burn. Will you let them extinguish?',true); 
-        chs('"No! (Pick up your broken soul)"',false).addEventListener('click',()=>{appear(dom.ct_ctrl);smove(chss.tdf,false);giveItem(wpn.stk1);giveItem(acc.gsfk); giveItem(item.hrb1,15);global.flags.aw_u=true;});
+        chs('"No! (Pick up your broken soul)"',false).addEventListener('click',()=>{appear(dom.ct_ctrl);smove(chss.tdf,false);giveItem(wpn.stk1);giveItem(item.hrb1,15);global.flags.aw_u=true;});
       });
     });
   }
