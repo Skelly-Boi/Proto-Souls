@@ -7549,6 +7549,7 @@ creature.sdummy.desc = 'He\'s made of straw';
 creature.sdummy.drop =[{item:item.sstraw,chance:.085},{item:item.hrb1,chance:.02}];
 creature.sdummy.aff = [0,0,15,-25,-5,-666,666];
 creature.sdummy.stat_p=[.25,.6,.3,.2];
+creature.sdummy.eqp[0].aff = [0,0,0,0,0,0,20];
 creature.sdummy.ctype = 2;
 creature.sdummy.int_r = 0;
 creature.sdummy.rnk=1;
@@ -11604,11 +11605,11 @@ chss.intro2.sl=()=>{ global.lst_loc = 99; global.flags.inside=true; d_loc('Dojo,
     chs('???: Then why not wake up? Carve your way back there...',true);
     chs('"...To never fall again."',false).addEventListener('click',()=>{
       appear(dom.d0);you.spawn = chss.hbed;
-      chs('???: Get up, little whisp. Gather back your soul.',true);
+      chs('???: Get up, little wisp. Gather back your soul.',true);
       chs('"My form is weak, a shade of what once was."',false).addEventListener('click',()=>{
         appear(dom.inv_ctx);  appear(dom.d_lct);
         chs('???: But the cinders still burn. Will you let them extinguish?',true); 
-        chs('"No! (Pick up your broken soul)"',false).addEventListener('click',()=>{appear(dom.ct_ctrl);smove(chss.tdf,false);giveItem(wpn.stk1); giveItem(item.hrb1,15);global.flags.aw_u=true;});
+        chs('"No! (Pick up your broken soul)"',false).addEventListener('click',()=>{appear(dom.ct_ctrl);smove(chss.tdf,false);giveItem(wpn.stk1);giveItem(acc.gsfk); giveItem(item.hrb1,15);global.flags.aw_u=true;});
       });
     });
   }
